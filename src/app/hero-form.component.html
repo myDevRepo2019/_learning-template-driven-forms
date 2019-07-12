@@ -1,0 +1,58 @@
+{{diagnostics}}
+<div class="container">
+  <h1>Hero Form</h1>
+  <form #heroForm="ngForm" (ngSubmit)="SubmitForm()">
+    <div class="form-group">
+      <label for="heroName">
+        Name
+      </label>
+      <input type="text" id="heroName" 
+      class="form-control" 
+      required [(ngModel)]="currentHeroModel.name" 
+      name="heroName"
+        #spy
+        #heroName="ngModel">
+      <div [hidden]="heroName.valid || heroName.pristine" 
+          class="alert alert-danger">
+        Name is required
+      </div>
+      TODO: remove this: {{currentHeroModel.name}}<br>
+
+    </div>
+    <div class="form-group">
+      <label for="powers">
+        Hero Powers
+      </label>
+      <select 
+        class="form-control" 
+        id="power" 
+        required 
+        [(ngModel)]="currentHeroModel.power" 
+        name="power"
+        #power="ngModel">
+        <option *ngFor="let power of powers" [value]="power">{{power}}</option>
+      </select>
+    </div>
+    <div [hidden]="power.valid || power.pristine" 
+    class="alert alert-danger">
+    Power is required
+    </div>
+    
+
+
+    <div class="form-group">
+      <label for="alterEgo">
+        Alter Ego
+      </label>
+      <input type="text" id="alterEgo" class="form-control" [(ngModel)]="currentHeroModel.alterEgo" name="alterEgo">
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+
+    <br>
+    <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()" >New Hero</button>
+  </form>
+</div>
+
+TODO: remove this: {{spy.className}}
